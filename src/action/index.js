@@ -3,6 +3,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export function login(id, Password) {
+  console.log("Action: ", id, Password);
   return {
     type: LOGIN,
     promise: { method: "post", url: "/login", data: { id, Password } },

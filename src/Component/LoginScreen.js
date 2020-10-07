@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { green, purple } from "@material-ui/core/colors";
 import { Redirect } from "react-router-dom";
-import { login } from "../action";
+import { login, loginSuccess } from "../action";
 import { connect } from "react-redux";
 import "../reducer/index";
 
@@ -79,6 +79,7 @@ class LoginScreen extends Component {
       this.setState({
         rst: rst.result,
       });
+      this.props.loginSuccess();
     });
     promise.catch((response) => {
       console.log("Error! ", response);
@@ -126,6 +127,7 @@ class LoginScreen extends Component {
 
 let mapDispatchtoProps = (dispatch) => ({
   updateLogin: (id, Password) => dispatch(login(id, Password)),
+  loginSuccess: () => dispatch(loginSuccess()),
 });
 LoginScreen = connect(undefined, mapDispatchtoProps)(LoginScreen);
 
