@@ -7,7 +7,6 @@ import { Redirect } from "react-router-dom";
 import { login, loginSuccess } from "../action";
 import { connect } from "react-redux";
 import "../reducer/index";
-
 const BaseURL1 = "http://10.1.1.153:5000";
 const ColorButton = withStyles((theme) => ({
   root: {
@@ -79,7 +78,6 @@ class LoginScreen extends Component {
       this.setState({
         rst: rst.result,
       });
-      this.props.loginSuccess();
     });
     promise.catch((response) => {
       console.log("Error! ", response);
@@ -88,8 +86,17 @@ class LoginScreen extends Component {
   //click 시 id/pw 확인
   render() {
     const { classes } = this.props;
-
+    const loginState = sessionStorage.getItem("login_ok");
     if (this.state.rst === 1) {
+      localStorage.setItem("id", this.state.id);
+      localStorage.setItem("Password", this.state.Password);
+      localStorage.setItem("login_ok", this.state.rst);
+      sessionStorage.setItem("id", this.state.id);
+      sessionStorage.setItem("Password", this.state.Password);
+      sessionStorage.setItem("login_ok", this.state.rst);
+      this.props.loginSuccess();
+      return <Redirect to="/LoginSuccess" />;
+    } else if (loginState === "1") {
       return <Redirect to="/LoginSuccess" />;
     } else {
       return (
@@ -129,6 +136,7 @@ let mapDispatchtoProps = (dispatch) => ({
   updateLogin: (id, Password) => dispatch(login(id, Password)),
   loginSuccess: () => dispatch(loginSuccess()),
 });
+
 LoginScreen = connect(undefined, mapDispatchtoProps)(LoginScreen);
 
 export default withStyles(Styles)(LoginScreen);

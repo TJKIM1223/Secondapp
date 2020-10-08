@@ -1,8 +1,7 @@
-import axios from "axios";
-import React, { Component } from "react";
+import React from "react";
 import LoginScreen from "./Component/LoginScreen";
 import LoginSuccess from "./Component/LoginSuccess";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 function App() {
   return (
     <BrowserRouter>

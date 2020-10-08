@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from "../action";
+import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../action";
 
 const LoginInitialState = {
   loginSuccess: false,
@@ -22,6 +22,12 @@ const LoginMechanism = (state = LoginInitialState, action) => {
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
         ...state,
+      });
+    case LOGOUT:
+      return Object.assign({}, state, {
+        ...state,
+        loginSuccess: false,
+        user: null,
       });
     default:
       return state;
